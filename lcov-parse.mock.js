@@ -4,7 +4,7 @@ const fs = require('fs');
     fs.mkdirSync('coverage');
   }
   const res = {total: {}};
-  ['lines', 'functions', 'branches'].forEach((name, i) => {
+  ['lines', 'functions', 'branches', 'statements'].forEach((name, i) => {
     res['total'][name] = {
       total: 95 + i,
       covered: 90 + i,
