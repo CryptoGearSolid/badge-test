@@ -48,9 +48,9 @@ jobs:
           attempt_limit: 3
           attempt_delay: 2000
           command: |
+            git checkout gh-pages
             cp -R $RUNNER_TEMP/coverage coverage 
             ls -la coverage
-            git checkout gh-pages
             git add coverage
             git commit -m 'Upload coverage html [skip ci]'
             git push
