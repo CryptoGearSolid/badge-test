@@ -39,3 +39,19 @@ jobs:
         # https://stackoverflow.com/questions/64781462/github-actions-default-branch-variable
         if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         uses: we-cli/coverage-badge-action@main
+
+      - name: Checkout To Github Pages
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+
+      - name: Deploy Coverage HTML
+        uses: Wandalen/wretry.action@master
+        with:
+          attempt_limit: 3
+          attempt_delay: 2000
+          command: |
+            mv $RUNNER_TEMP/coverage ./
+            git add coverage
+            git commit -m 'Upload coverage html [skip ci]'
+            git push
