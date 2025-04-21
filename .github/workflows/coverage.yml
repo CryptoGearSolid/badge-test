@@ -33,7 +33,7 @@ jobs:
       - name: Generate coverage report
         run: |
           node ./lcov-parse.mock.js
-          ls coverage
+          cp -R coverage $RUNNER_TEMP/coverage
 
       - name: Update Coverage Badge
         # GitHub actions: default branch variable
@@ -48,8 +48,9 @@ jobs:
           attempt_limit: 3
           attempt_delay: 2000
           command: |
-            ls coverage
             git checkout gh-pages
+            cp -R $RUNNER_TEMP/coverage coverage 
+            ls -la coverage
             git add coverage
             git commit -m 'Upload coverage html [skip ci]'
             git push
